@@ -1,0 +1,14 @@
+// Buat sebagai Modeling > New table (satu formula)
+Dim_Date =
+ADDCOLUMNS(
+    CALENDAR(
+        DATE(YEAR(MIN('Fact_Sales'[Transaction_Date_Clean])), 1, 1),
+        EOMONTH(MAX('Fact_Sales'[Transaction_Date_Clean]), 0)
+    ),
+    "Date_Key", VALUE(FORMAT([Date], "yyyymmdd")),
+    "Year", YEAR([Date]),
+    "Month_Number", MONTH([Date]),
+    "Month_Year", FORMAT([Date], "MMM yyyy"),
+    "Month_Index", YEAR([Date]) * 12 + MONTH([Date]),
+    "Month_Key", YEAR([Date]) * 10000 + MONTH([Date]) * 100 + 1
+)

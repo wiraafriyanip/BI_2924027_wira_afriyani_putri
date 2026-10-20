@@ -1,0 +1,44 @@
+// Buat setelah Fact_Target, Dim_Date, Dim_Product, Dim_Customer tersedia.
+// Perhatikan Gross Profit & Profit Margin sengaja menimpa definisi M05 di salinan M06.
+// Tempel semua di DAX Query View setelah tabel _Measures tersedia.
+// Run > pastikan tidak error > Update model with changes.
+DEFINE
+    /// Praktikum 06 menggunakan kolom Profit: berbeda dari Gross Profit Praktikum 05.
+    MEASURE '_Measures'[Gross Profit] = SUM('Fact_Sales'[Profit])
+
+    /// Gross Profit (berbasis Profit) dibagi Total Sales; definisi Praktikum 06.
+    MEASURE '_Measures'[Profit Margin] = DIVIDE([Gross Profit], [Total Sales], 0)
+
+    /// Jumlah target penjualan per bulan dan cabang, dipengaruhi relasi Dim_Date serta Dim_Branch.
+    MEASURE '_Measures'[Sales Target] = SUM('Fact_Target'[Sales_Target])
+
+    /// Rasio aktual Total Sales terhadap Sales Target.
+    MEASURE '_Measures'[Target Achievement %] = DIVIDE([Total Sales], [Sales Target], 0)
+
+    /// Alias berbahasa Indonesia untuk dashboard Praktikum 07.
+    MEASURE '_Measures'[Total Penjualan] = [Total Sales]
+
+    /// Alias untuk laba Praktikum 06–07 menggunakan kolom Profit.
+    MEASURE '_Measures'[Total Laba] = [Gross Profit]
+
+    /// Alias margin berbasis Profit Praktikum 06–07.
+    MEASURE '_Measures'[Margin Laba] = [Profit Margin]
+
+    /// Alias jumlah Transaction_ID unik.
+    MEASURE '_Measures'[Jumlah Transaksi] = [Orders]
+
+    /// Judul dinamis untuk halaman Branch Detail.
+    MEASURE '_Measures'[Judul Cabang] = SELECTEDVALUE('Dim_Branch'[Branch_Name], "Seluruh Cabang")
+
+EVALUATE
+ROW(
+    "Gross Profit", [Gross Profit],
+    "Profit Margin", [Profit Margin],
+    "Sales Target", [Sales Target],
+    "Target Achievement %", [Target Achievement %],
+    "Total Penjualan", [Total Penjualan],
+    "Total Laba", [Total Laba],
+    "Margin Laba", [Margin Laba],
+    "Jumlah Transaksi", [Jumlah Transaksi],
+    "Judul Cabang", [Judul Cabang]
+)
