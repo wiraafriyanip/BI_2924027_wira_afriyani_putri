@@ -1,0 +1,46 @@
+# TIGA INSIGHT BISNIS — PRAKTIKUM 06
+
+**Nama:** Wira Afriyani Putri  
+**NIM:** 2924027  
+**Mata Kuliah:** Kecerdasan Bisnis  
+**Topik:** Executive Overview SumbarMart 360
+
+## Insight 1 — Kinerja Penjualan dan Profit Perusahaan
+
+**Temuan:** SumbarMart menghasilkan penjualan sekitar Rp1,44 miliar dengan margin laba sebesar 31,88%.
+
+**Bukti Visual/KPI:** Total Sales sebesar Rp1.435.310.614,12, Gross Profit sebesar Rp457.635.546,00, Profit Margin 31,88%, dan Target Achievement 13,09%.
+
+**Konteks Filter:** Seluruh periode dan cabang, tanpa filter aktif.
+
+**Implikasi Keputusan:** Manajemen dapat menggunakan informasi ini sebagai gambaran awal kinerja perusahaan dan mengevaluasi kesenjangan antara penjualan aktual dengan target.
+
+**Batas Interpretasi:** Angka agregat tidak menjelaskan penyebab perubahan kinerja. Interpretasi pencapaian target juga perlu memperhatikan kesesuaian periode dan tingkat detail data target.
+
+## Insight 2 — Kinerja Penjualan Online Cabang Aur Kuning
+
+**Temuan:** Pada tahun 2025, penjualan melalui kanal Online di cabang SumbarMart Aur Kuning mencapai sekitar Rp15,02 juta, dengan margin laba 31,85%.
+
+**Bukti Visual/KPI:** Total Sales Rp15.023.028,97, Gross Profit Rp4.784.559,57, Profit Margin 31,85%, dan Target Achievement 1,97%.
+
+**Konteks Filter:** Year = 2025, Branch = SumbarMart Aur Kuning, Channel = Online.
+
+**Implikasi Keputusan:** Manajemen dapat membandingkan kontribusi kanal Online dengan kanal penjualan lainnya untuk mengevaluasi peluang pengembangan pemasaran digital.
+
+**Batas Interpretasi:** Nilai tersebut hanya menggambarkan satu cabang, satu tahun, dan satu kanal. Target Achievement juga tidak dapat langsung dianggap sebagai pencapaian target khusus kanal Online apabila data target tidak dibedakan berdasarkan kanal.
+
+## Insight 3 — Kontribusi Profit Berdasarkan Kategori Produk
+
+**Temuan:** Kategori Rumah Tangga menunjukkan kontribusi Gross Profit tertinggi pada grafik Profit by Category dalam konteks filter yang diuji.
+
+**Bukti Visual/KPI:** Grafik Profit by Category menempatkan kategori Rumah Tangga pada urutan tertinggi, diikuti kategori lainnya seperti Makanan dan ATK & Digital.
+
+**Konteks Filter:** Year = 2025, Branch = SumbarMart Aur Kuning, Channel = Online.
+
+**Implikasi Keputusan:** Manajemen dapat mengevaluasi kategori Rumah Tangga sebagai salah satu prioritas analisis produk, persediaan, dan strategi promosi pada kanal Online.
+
+**Batas Interpretasi:** Kontribusi profit tertinggi tidak otomatis menunjukkan margin tertinggi atau membuktikan efektivitas promosi. Analisis lanjutan diperlukan untuk membandingkan penjualan, biaya, diskon, dan jumlah transaksi setiap kategori.
+
+## Kesimpulan
+
+Dashboard Executive Overview membantu menyajikan ringkasan kinerja penjualan, laba, pencapaian target, dan kontribusi kategori produk. Kombinasi KPI, grafik, dan filter memungkinkan pengambilan keputusan berdasarkan konteks bisnis yang berbeda, dengan tetap memperhatikan keterbatasan data serta definisi indikator.
