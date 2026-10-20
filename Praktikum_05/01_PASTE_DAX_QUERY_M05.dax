@@ -1,0 +1,38 @@
+// Tempel semua di DAX Query View setelah tabel _Measures tersedia.
+// Run > pastikan tidak error > Update model with changes.
+DEFINE
+    /// Total pendapatan dari transaksi bersih pada konteks filter aktif.
+    MEASURE '_Measures'[Total Sales] = SUM('Fact_Sales'[Revenue])
+
+    /// Total biaya transaksi bersih sesuai filter aktif.
+    MEASURE '_Measures'[Total Cost] = SUM('Fact_Sales'[Cost])
+
+    /// Laba kotor Praktikum 05 didefinisikan dari penjualan dikurangi Cost; berbeda dengan Profit yang dipakai modul 06.
+    MEASURE '_Measures'[Gross Profit] = [Total Sales] - [Total Cost]
+
+    /// Margin laba kotor dari definisi Praktikum 05.
+    MEASURE '_Measures'[Profit Margin] = DIVIDE([Gross Profit], [Total Sales], 0)
+
+    /// Jumlah nomor transaksi unik.
+    MEASURE '_Measures'[Orders] = DISTINCTCOUNT('Fact_Sales'[Transaction_ID])
+
+    /// Jumlah pelanggan unik, Customer_ID kosong tidak ikut dihitung.
+    MEASURE '_Measures'[Customers] = CALCULATE(DISTINCTCOUNT('Fact_Sales'[Customer_ID]), 'Fact_Sales'[Customer_ID] <> BLANK())
+
+    /// Proporsi transaksi dengan Return_Flag Ya dibanding semua transaksi dalam filter aktif.
+    MEASURE '_Measures'[Return Rate] = DIVIDE(CALCULATE([Orders], 'Fact_Sales'[Return_Flag] = "Ya"), [Orders], 0)
+
+    /// Rerata Satisfaction_Score; blank diabaikan, tidak diganti nol.
+    MEASURE '_Measures'[Avg Satisfaction] = AVERAGE('Fact_Sales'[Satisfaction_Score])
+
+EVALUATE
+ROW(
+    "Total Sales", [Total Sales],
+    "Total Cost", [Total Cost],
+    "Gross Profit", [Gross Profit],
+    "Profit Margin", [Profit Margin],
+    "Orders", [Orders],
+    "Customers", [Customers],
+    "Return Rate", [Return Rate],
+    "Avg Satisfaction", [Avg Satisfaction]
+)

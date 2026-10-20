@@ -1,0 +1,44 @@
+createOrReplace
+
+    ref table _Measures
+
+        /// Total pendapatan dari transaksi bersih pada konteks filter aktif.
+        measure 'Total Sales' = SUM('Fact_Sales'[Revenue])
+            formatString: #,##0.00
+            displayFolder: 01_Financial
+
+        /// Total biaya transaksi bersih sesuai filter aktif.
+        measure 'Total Cost' = SUM('Fact_Sales'[Cost])
+            formatString: #,##0.00
+            displayFolder: 01_Financial
+
+        /// Laba kotor Praktikum 05 didefinisikan dari penjualan dikurangi Cost; berbeda dengan Profit yang dipakai modul 06.
+        measure 'Gross Profit' = [Total Sales] - [Total Cost]
+            formatString: #,##0.00
+            displayFolder: 01_Financial
+
+        /// Margin laba kotor dari definisi Praktikum 05.
+        measure 'Profit Margin' = DIVIDE([Gross Profit], [Total Sales], 0)
+            formatString: 0.0%
+            displayFolder: 01_Financial
+
+        /// Jumlah nomor transaksi unik.
+        measure 'Orders' = DISTINCTCOUNT('Fact_Sales'[Transaction_ID])
+            formatString: #,##0
+            displayFolder: 02_Volume
+
+        /// Jumlah pelanggan unik, Customer_ID kosong tidak ikut dihitung.
+        measure 'Customers' = CALCULATE(DISTINCTCOUNT('Fact_Sales'[Customer_ID]), 'Fact_Sales'[Customer_ID] <> BLANK())
+            formatString: #,##0
+            displayFolder: 02_Volume
+
+        /// Proporsi transaksi dengan Return_Flag Ya dibanding semua transaksi dalam filter aktif.
+        measure 'Return Rate' = DIVIDE(CALCULATE([Orders], 'Fact_Sales'[Return_Flag] = "Ya"), [Orders], 0)
+            formatString: 0.0%
+            displayFolder: 03_Service
+
+        /// Rerata Satisfaction_Score; blank diabaikan, tidak diganti nol.
+        measure 'Avg Satisfaction' = AVERAGE('Fact_Sales'[Satisfaction_Score])
+            formatString: #,##0.00
+            displayFolder: 03_Service
+
