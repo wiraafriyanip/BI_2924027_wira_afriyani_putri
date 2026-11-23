@@ -1,0 +1,121 @@
+-- PRAKTIKUM 10 | KELOMPOK 04
+-- Model target: 4 dimensions + 3 facts
+-- Pastikan nama tabel/kolom sesuai dengan model yang diimpor ke Power BI.
+
+Total Sales =
+SUM ( 'Fact_OrderLines'[Sales] )
+
+Total Profit =
+SUM ( 'Fact_OrderLines'[Profit] )
+
+Profit Margin =
+DIVIDE ( [Total Profit], [Total Sales], 0 )
+
+Orders Count =
+DISTINCTCOUNT ( 'Fact_OrderSummary'[Order ID] )
+
+Units Sold =
+SUM ( 'Fact_OrderLines'[Quantity] )
+
+Average Discount =
+AVERAGE ( 'Fact_OrderLines'[Discount] )
+
+Loss-making Line Rate =
+DIVIDE (
+    CALCULATE (
+        COUNTROWS ( 'Fact_OrderLines' ),
+        'Fact_OrderLines'[Profit] < 0
+    ),
+    COUNTROWS ( 'Fact_OrderLines' ),
+    0
+)
+
+Average Order Value =
+DIVIDE ( [Total Sales], [Orders Count], 0 )
+
+-- Indikator tambahan, bukan bagian dari delapan KPI inti Project Charter.
+Returned Orders =
+CALCULATE (
+    DISTINCTCOUNT ( 'Fact_OrderSummary'[Order ID] ),
+    'Fact_OrderSummary'[Returned] = "Yes"
+)
+
+Return Rate =
+DIVIDE ( [Returned Orders], [Orders Count], 0 )
+
+-- Diagnostic measures untuk key checks pada model target.
+Dim Product Duplicate Key Count =
+COUNTROWS ( 'Dim_Product' ) - DISTINCTCOUNT ( 'Dim_Product'[ProductKey] )
+
+Dim Customer Duplicate Key Count =
+COUNTROWS ( 'Dim_Customer' ) - DISTINCTCOUNT ( 'Dim_Customer'[Customer ID] )
+
+Dim Region Duplicate Key Count =
+COUNTROWS ( 'Dim_Region' ) - DISTINCTCOUNT ( 'Dim_Region'[Region] )
+
+Dim Date Duplicate Key Count =
+COUNTROWS ( 'Dim_Date' ) - DISTINCTCOUNT ( 'Dim_Date'[Date] )
+
+Orphan ProductKey Count =
+COUNTROWS (
+    EXCEPT (
+        VALUES ( 'Fact_OrderLines'[ProductKey] ),
+        VALUES ( 'Dim_Product'[ProductKey] )
+    )
+)
+
+Orphan Customer ID Count =
+COUNTROWS (
+    EXCEPT (
+        VALUES ( 'Fact_OrderLines'[Customer ID] ),
+        VALUES ( 'Dim_Customer'[Customer ID] )
+    )
+)
+
+Orphan Region OrderLines Count =
+COUNTROWS (
+    EXCEPT (
+        VALUES ( 'Fact_OrderLines'[Region] ),
+        VALUES ( 'Dim_Region'[Region] )
+    )
+)
+
+Orphan Order Date OrderLines Count =
+COUNTROWS (
+    EXCEPT (
+        VALUES ( 'Fact_OrderLines'[Order Date] ),
+        VALUES ( 'Dim_Date'[Date] )
+    )
+)
+
+Orphan Region OrderSummary Count =
+COUNTROWS (
+    EXCEPT (
+        VALUES ( 'Fact_OrderSummary'[Region] ),
+        VALUES ( 'Dim_Region'[Region] )
+    )
+)
+
+Orphan Date OrderSummary Count =
+COUNTROWS (
+    EXCEPT (
+        VALUES ( 'Fact_OrderSummary'[Order Date] ),
+        VALUES ( 'Dim_Date'[Date] )
+    )
+)
+
+Orphan Region OrderCategory Count =
+COUNTROWS (
+    EXCEPT (
+        VALUES ( 'Fact_OrderCategory'[Region] ),
+        VALUES ( 'Dim_Region'[Region] )
+    )
+)
+
+Orphan Date OrderCategory Count =
+COUNTROWS (
+    EXCEPT (
+        VALUES ( 'Fact_OrderCategory'[Order Date] ),
+        VALUES ( 'Dim_Date'[Date] )
+    )
+)
