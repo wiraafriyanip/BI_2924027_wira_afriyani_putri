@@ -1,0 +1,29 @@
+P11 RANDOM FOREST — REPRODUCTION LOG
+Kelompok 04 | Wahyu Anisa Efriati (2924002)
+
+Status: SUCCESS
+Script: P11_RandomForest_Wahyu_Reproducible.py
+Input: Model_Data_Superstore_P10_Kelompok04_INPUT.xlsx
+Sheet: Fact_OrderLines; header row Excel ke-3
+Runtime used for verification: pandas 2.2.3; scikit-learn 1.8.0
+
+Configuration:
+- Target: Profit
+- Model A: Sales + Discount
+- Model B: Sales only
+- Train: Order Date < 2026-04-03
+- Test: Order Date >= 2026-04-03
+- Train rows: 7,345
+- Test rows: 2,849
+- RandomForestRegressor: 300 trees; min_samples_leaf=2
+- Seeds: 42, 7, 21
+
+Mean results:
+- Baseline: MAE 63.334; RMSE 217.169; R2 -0.001
+- Model A: MAE 25.172; RMSE 103.651; R2 0.772
+- Model B: MAE 48.083; RMSE 190.354; R2 0.231
+- Model A feature importance: Sales 76.014%; Discount 23.986%
+
+The script's Feature Importance export line was corrected to use:
+  .rename_axis("Feature").reset_index()
+The script completed successfully in the verification run. The generated workbook is included.

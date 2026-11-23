@@ -1,0 +1,11 @@
+PAKET REPRODUKSI RANDOM FOREST — P11 KELOMPOK 04
+
+Kebutuhan: Python 3, pandas, scikit-learn, openpyxl.
+Jalankan dari folder ini:
+python P11_RandomForest_Wahyu_Reproducible.py --input Model_Data_Superstore_P10_Kelompok04_INPUT.xlsx --output P11_RandomForest_Hasil_Reproduksi_Wahyu.xlsx
+
+Target: Profit pada grain order line.
+Model A: Sales + Discount. Model B: Sales saja.
+Train: Order Date < 2026-04-03. Test: Order Date >= 2026-04-03.
+RandomForestRegressor: n_estimators=300, min_samples_leaf=2, random_state=42, 7, 21.
+Catatan: script telah diperbaiki pada pembuatan tabel Feature Importance agar kompatibel dengan pandas Series.reset_index().
